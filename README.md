@@ -4,7 +4,7 @@
   </tr>
   <tr>
     <td >D1</td>
-    <td>X</td>
+    <td>O</td>
   </tr>
   <tr>
     <td >D2</td>
