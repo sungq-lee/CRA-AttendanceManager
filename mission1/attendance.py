@@ -1,3 +1,5 @@
+from settings import ROOT_DIR
+
 WEEK_DAY = {
     "monday": 0,
     "tuesday": 1,
@@ -16,7 +18,7 @@ GRADE = {
 
 NORMAL_POINT = 1
 WEDNESDAY_POINT = 3
-WEEKEND_POINT = 3
+WEEKEND_POINT = 2
 
 WEDNESDAY_BENEFIT_POINT = 10
 WEEKEND_BENEFIT_POINT = 10
@@ -85,7 +87,7 @@ def get_weekend_benefit_point():
             points[i] += WEEKEND_BENEFIT_POINT
 
 
-def process_user_grade():
+def calculate_user_grade():
     for i in range(1, id_cnt + 1):
         if points[i] >= GRADE_FOR_GOLD:
             grade[i] = GRADE["GOLD"]
@@ -104,7 +106,7 @@ def process_user_grade():
             print("NORMAL")
 
 
-def process_removed_player():
+def calculate_removed_player():
     print("\nRemoved player")
     print("==============")
     for i in range(1, id_cnt + 1):
@@ -120,9 +122,9 @@ def input_name_and_day_of_week(user_name, week_day):
     get_user_attendance_point(user_id, week_day)
 
 
-def input_attendance_weekday_500_file():
+def input_and_process_attendance_weekday_500_file(file_path=f"{ROOT_DIR}/attendance_weekday_500.txt"):
     try:
-        with open("attendance_weekday_500.txt", encoding='utf-8') as f:
+        with open(file_path, encoding='utf-8') as f:
             for _ in range(500):
                 line = f.readline()
                 if not line:
@@ -135,12 +137,13 @@ def input_attendance_weekday_500_file():
 
         get_wednesday_benefit_point()
         get_weekend_benefit_point()
-        process_user_grade()
-        process_removed_player()
+        calculate_user_grade()
+        calculate_removed_player()
 
     except FileNotFoundError:
         print("파일을 찾을 수 없습니다.")
+        raise
 
 
 if __name__ == "__main__":
-    input_attendance_weekday_500_file()
+    input_and_process_attendance_weekday_500_file()

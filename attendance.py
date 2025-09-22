@@ -1,3 +1,5 @@
+from settings import ROOT_DIR
+
 id1 = {}
 id_cnt = 0
 
@@ -50,9 +52,9 @@ def input2(w, wk):
     dat[id2][index] += 1
     points[id2] += add_point
 
-def input_file():
+def input_file(file_path=f"{ROOT_DIR}/attendance_weekday_500.txt"):
     try:
-        with open("attendance_weekday_500.txt", encoding='utf-8') as f:
+        with open(file_path, encoding='utf-8') as f:
             for _ in range(500):
                 line = f.readline()
                 if not line:
@@ -90,6 +92,7 @@ def input_file():
 
     except FileNotFoundError:
         print("파일을 찾을 수 없습니다.")
+        raise
 
 if __name__ == "__main__":
     input_file()
